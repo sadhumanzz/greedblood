@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://bdnyglk1i1cxl"]
+
+[ext_resource type="Script" path="res://gameplay/gameplay.gd" id="1_thqv1"]
+[ext_resource type="PackedScene" uid="uid://cko02oljhiby" path="res://paused/paused.tscn" id="3_w8wrl"]
+[ext_resource type="PackedScene" uid="uid://cee5dna3u27jf" path="res://assets/select_sfx.tscn" id="4_7kf0b"]
+[ext_resource type="PackedScene" uid="uid://cm0crolsssn3c" path="res://assets/landscape.tscn" id="5_2ac3e"]
+[ext_resource type="PackedScene" uid="uid://byrvdb2tdkndh" path="res://player_controller.tscn" id="5_ex2wr"]
+[ext_resource type="PackedScene" uid="uid://bmhj7s7x6s0sv" path="res://PhysicsTarget.tscn" id="6_0ige6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sjwai"]
+
+[sub_resource type="Sky" id="Sky_bhnbk"]
+sky_material = SubResource("ProceduralSkyMaterial_sjwai")
+
+[sub_resource type="Environment" id="Environment_rtm67"]
+background_mode = 2
+sky = SubResource("Sky_bhnbk")
+tonemap_mode = 2
+volumetric_fog_density = 0.0184
+volumetric_fog_albedo = Color(1, 1, 0, 1)
+
+[node name="Gameplay" type="Node3D"]
+script = ExtResource("1_thqv1")
+
+[node name="Paused" parent="." instance=ExtResource("3_w8wrl")]
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="PlayerController" parent="." instance=ExtResource("5_ex2wr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rtm67")
+
+[node name="SelectSfx" parent="." instance=ExtResource("4_7kf0b")]
+
+[node name="landscapetesting" parent="." instance=ExtResource("5_2ac3e")]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
+
+[node name="Box" parent="." instance=ExtResource("6_0ige6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.45428, 2.55915, 4.80778)

@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bwcoqcwadunv4"]
+
+[ext_resource type="Texture2D" uid="uid://bn27jlyotskkg" path="res://SKINROTLOWRES.png" id="1_m6js7"]
+
+[resource]
+albedo_texture = ExtResource("1_m6js7")
+texture_filter = 0

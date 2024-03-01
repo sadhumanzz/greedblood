@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bloeghrj3espt"]
+
+[ext_resource type="PackedScene" uid="uid://dd7kw84cfm0da" path="res://Blender Models/goofyGunStandin.glb" id="1_ogs8s"]
+
+[node name="gun" instance=ExtResource("1_ogs8s")]

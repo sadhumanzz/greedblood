@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmhj7s7x6s0sv"]
+
+[ext_resource type="Script" path="res://PhysicsTarget.gd" id="1_pbe0n"]
+[ext_resource type="Texture2D" uid="uid://cvrwcqjuh1ybf" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_tyj3b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10my1"]
+albedo_texture = ExtResource("2_tyj3b")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_8pl77"]
+material = SubResource("StandardMaterial3D_10my1")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_calab"]
+
+[node name="Box" type="RigidBody3D" groups=["Target"]]
+collision_layer = 4
+collision_mask = 7
+mass = 0.25
+script = ExtResource("1_pbe0n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_8pl77")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_calab")

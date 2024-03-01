@@ -1,0 +1,196 @@
+[gd_scene load_steps=8 format=3 uid="uid://brtjffbqejft0"]
+
+[ext_resource type="Script" path="res://HUD.gd" id="1_amjgi"]
+[ext_resource type="Texture2D" uid="uid://b6tvn4x6ul1ho" path="res://assets/kenney_crosshairPack/PNG/White/crosshair141.png" id="2_2a4qd"]
+[ext_resource type="Script" path="res://Weapons_Manager.gd" id="3_lgxr5"]
+
+[sub_resource type="GDScript" id="GDScript_ee41h"]
+script/source = "extends CharacterBody3D
+
+const WALK_SPEED = 5.0
+const SPRINT_SPEED = 8.0
+const JUMP_VELOCITY = 4.5
+const BOB_FREQ = 2.0
+const BOB_AMP = 0.08
+const FOV_CHANGE = 1.5
+
+var speed
+var t_bob: float = 0.0
+var gravity: float = 9.8
+var sensitivity = Global.sensitivity
+
+var coyote_time: float = 0.1
+var can_jump: bool = false
+
+var jump_buffer: float = 0.0
+
+@onready var head = $Head
+@onready var camera = $Head/Camera3D 
+
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		head.rotate_y(-event.relative.x * sensitivity)
+		camera.rotate_x(-event.relative.y * sensitivity)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	
+	if is_on_floor() and can_jump == false:
+		can_jump = true
+	elif can_jump and $CoyoteTimer.is_stopped():
+		$CoyoteTimer.start(coyote_time)
+	
+	if Input.is_action_just_pressed(\"Jump\"):
+		jump_buffer = 0.3
+	jump_buffer -= delta
+	
+	# Handle Jump.
+	if jump_buffer > 0 and can_jump:
+		jump_buffer = 0
+		velocity.y = JUMP_VELOCITY
+	
+	# Handle Sprint.
+	if Input.is_action_pressed(\"Dash\"):
+		speed = SPRINT_SPEED
+	else:
+		speed = WALK_SPEED
+	
+	# Get the input direction and handle the movement/deceleration.
+	var input_dir = Input.get_vector(\"Strafe Left\", \"Strafe Right\", \"Forward\", \"Backward\")
+	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if is_on_floor():
+		if direction:
+			velocity.x = lerp(velocity.x, direction.x * speed, delta * 15.0)
+			velocity.z = lerp(velocity.z, direction.z * speed, delta * 15.0)
+		else:
+			velocity.x = lerp(velocity.x, direction.x * speed, delta * 15.0)
+			velocity.z = lerp(velocity.z, direction.z * speed, delta * 15.0)
+	else:
+		velocity.x = lerp(velocity.x, direction.x * speed, delta * 3.0)
+		velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
+	
+	#Head bob.
+	t_bob += delta * velocity.length() * float(is_on_floor())
+	camera.transform.origin = _headbob(t_bob)
+	
+	#FOV
+	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
+	var target_fov = Global.base_fov + FOV_CHANGE * velocity_clamped
+	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
+	
+	move_and_slide()
+
+func _headbob(time) -> Vector3:
+	var pos = Vector3.ZERO
+	pos.y = sin(time * BOB_FREQ) * BOB_AMP
+	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
+	return pos
+
+
+func _on_coyote_timer_timeout():
+	can_jump = false
+	pass # Replace with function body.
+"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lvhy0"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3hn1o"]
+points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607, 0.498884, 0.169713, 0.559144, 0.464172, 0.231051, -0.803591, 0.320455, 0.40741, 0.651043, -0.243523, -0.482789, 0.594843, 0.0822132, -0.362868, -0.682312, 0.289697, 0.469044, -0.654529, -0.0662713, -0.127444, 0.842701, -0.338103, -0.393435, -0.683942, -0.244717, 0.438255, 0.623309, 0.200849, 0.0841477, 0.977454, 0.114795, -0.0682023, -0.976458, -0.12927, 0.20055, -0.563129, -0.451454, -0.185527, 0.595453, -0.453475, -0.273363, 0.592268, 0.407754, -0.00693649, -0.476823, 0.49966, 0.375821, -0.588614, 0.316955, 0.111579, 0.563059, -0.481177, -0.41725, 0.527866, -0.270497, -0.484546, -0.596972, -0.0665097, -0.279747, 0.908561, 0.0533361, -0.250197, -0.880712, 0.205319, 0.263647, -0.902771, -0.127394, 0.293368, 0.871526, -0.157196, 0.373412, -0.526319, -0.328246, 0.499663, 0.476641, -0.00688856, 0.0531056, 0.875001, 0.324703, -0.154543, -0.590854, 0.465879, -0.0972799, -0.782358, -0.398188, -0.387649, -0.498171, 0.31565, -0.30068, -0.587995, -0.388901)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i01k8"]
+size = Vector3(2, 1, 2)
+
+[node name="PlayerController_RIG" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+floor_max_angle = 1.0472
+script = SubResource("GDScript_ee41h")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+script = ExtResource("1_amjgi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Current Weapon:"
+
+[node name="CurrentWeapon" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Ammo:"
+
+[node name="CurrentAmmo" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Weapon Stack:"
+
+[node name="WeaponStack" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="MainSight" type="TextureRect" parent="CanvasLayer"]
+process_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_2a4qd")
+stretch_mode = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_lvhy0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_3hn1o")
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.606385, 0)
+current = true
+
+[node name="Weapons_Manager" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.606385, 0)
+script = ExtResource("3_lgxr5")
+
+[node name="FPS_Rig" type="Node3D" parent="Head/Camera3D/Weapons_Manager"]
+
+[node name="Bullet_Point" type="Marker3D" parent="Head/Camera3D/Weapons_Manager/FPS_Rig"]
+unique_name_in_owner = true
+
+[node name="PickUpDetection" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUpDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_i01k8")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="Update_Ammo" from="Head/Camera3D/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_ammo"]
+[connection signal="Update_Weapon_Stack" from="Head/Camera3D/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_update_weapon_stack"]
+[connection signal="Weapon_Changed" from="Head/Camera3D/Weapons_Manager" to="CanvasLayer" method="_on_weapons_manager_weapon_changed"]
+[connection signal="body_entered" from="PickUpDetection" to="Head/Camera3D/Weapons_Manager" method="_on_pick_up_detection_body_entered"]
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

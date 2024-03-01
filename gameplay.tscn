@@ -1,0 +1,109 @@
+[gd_scene load_steps=15 format=3 uid="uid://bdnyglk1i1cxl"]
+
+[ext_resource type="Script" path="res://gameplay/gameplay.gd" id="1_thqv1"]
+[ext_resource type="PackedScene" uid="uid://cko02oljhiby" path="res://paused/paused.tscn" id="3_w8wrl"]
+[ext_resource type="PackedScene" uid="uid://cee5dna3u27jf" path="res://assets/select_sfx.tscn" id="4_7kf0b"]
+[ext_resource type="PackedScene" uid="uid://cm0crolsssn3c" path="res://assets/landscape.tscn" id="5_2ac3e"]
+[ext_resource type="PackedScene" uid="uid://byrvdb2tdkndh" path="res://player_controller.tscn" id="5_ex2wr"]
+[ext_resource type="PackedScene" uid="uid://bmhj7s7x6s0sv" path="res://PhysicsTarget.tscn" id="6_0ige6"]
+[ext_resource type="PackedScene" uid="uid://dc55733f512fq" path="res://target.tscn" id="7_jrpmf"]
+[ext_resource type="PackedScene" uid="uid://b2qm4644btvxd" path="res://spawnable weapons/bazooka.tscn" id="8_q3fhf"]
+[ext_resource type="PackedScene" uid="uid://bgugho736wcku" path="res://spawnable weapons/gun.tscn" id="9_5l38w"]
+[ext_resource type="PackedScene" uid="uid://dpwtnvk40qksh" path="res://spawnable weapons/lmg.tscn" id="10_kq6fy"]
+[ext_resource type="PackedScene" uid="uid://du6gw1r12pmoa" path="res://gun_clip.tscn" id="10_p1w06"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sjwai"]
+
+[sub_resource type="Sky" id="Sky_bhnbk"]
+sky_material = SubResource("ProceduralSkyMaterial_sjwai")
+
+[sub_resource type="Environment" id="Environment_rtm67"]
+background_mode = 2
+sky = SubResource("Sky_bhnbk")
+tonemap_mode = 2
+volumetric_fog_density = 0.0184
+volumetric_fog_albedo = Color(1, 1, 0, 1)
+
+[node name="Gameplay" type="Node3D"]
+script = ExtResource("1_thqv1")
+
+[node name="Paused" parent="." instance=ExtResource("3_w8wrl")]
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="PlayerController" parent="." instance=ExtResource("5_ex2wr")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rtm67")
+
+[node name="SelectSfx" parent="." instance=ExtResource("4_7kf0b")]
+
+[node name="landscapetesting" parent="." instance=ExtResource("5_2ac3e")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="Stationary_Targets" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 7)
+
+[node name="Target" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 10, -8)
+
+[node name="Target2" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 10, -5)
+
+[node name="Target3" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 10, -2)
+
+[node name="Target4" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 10, 1)
+
+[node name="Target5" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 10, 4)
+
+[node name="Target6" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 10, 7)
+
+[node name="Target7" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 7, -8)
+
+[node name="Target8" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 7, -5)
+
+[node name="Target9" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 7, -2)
+
+[node name="Target10" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 7, 1)
+
+[node name="Target11" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 7, 4)
+
+[node name="Target12" parent="Stationary_Targets" instance=ExtResource("7_jrpmf")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -15, 7, 7)
+
+[node name="Weapons" type="Node3D" parent="."]
+
+[node name="bazooka" parent="Weapons" instance=ExtResource("8_q3fhf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, -4)
+
+[node name="lmg" parent="Weapons" instance=ExtResource("10_kq6fy")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16, 1, -4)
+
+[node name="gun" parent="Weapons" instance=ExtResource("9_5l38w")]
+
+[node name="Dynamic_Targets" type="Node3D" parent="."]
+
+[node name="Box" parent="Dynamic_Targets" instance=ExtResource("6_0ige6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.45428, 2.55915, 4.80778)
+
+[node name="Ammo" type="Node3D" parent="."]
+
+[node name="gun_clip" parent="Ammo" instance=ExtResource("10_p1w06")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 1, -4)
+weapon_name = "gun"

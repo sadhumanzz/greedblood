@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6v7wghea1tlt"]
+
+[ext_resource type="PackedScene" uid="uid://co605mw77qa13" path="res://bazooka.glb" id="1_exdrd"]
+
+[node name="bazooka" instance=ExtResource("1_exdrd")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)

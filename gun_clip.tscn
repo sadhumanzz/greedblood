@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://du6gw1r12pmoa"]
+
+[ext_resource type="ArrayMesh" uid="uid://cyaf1sxbduj3x" path="res://gameplay/weapon_resources/PSXAmmoBoxes/9mm/9mm_240.obj" id="1_18rvb"]
+[ext_resource type="Script" path="res://weapon_pickup.gd" id="1_w5yam"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0b6fm"]
+points = PackedVector3Array(-0.602918, 0.0231557, -0.332856, -0.661111, 0.007947, -0.314786, -0.719913, 0.0660229, -0.314786, -0.602918, 0.289308, -0.332856, 0.778171, 0.00996303, -0.314786, -0.661111, 0.007947, 0.285561, -0.719913, 0.0660229, 0.285561, -0.778106, 0.126186, -0.261948, -0.777954, 0.126469, -0.261824, -0.602918, 0.289308, 0.303693, -0.47267, 0.353891, -0.246309, -0.427426, 0.354422, -0.291607, -0.305708, 0.368464, -0.314786, 0.778171, 0.368464, -0.314786, 0.778171, 0.00996303, 0.285561, -0.602918, 0.0231557, 0.303693, -0.778106, 0.126186, 0.232661, -0.777954, 0.126469, 0.232661, -0.47267, 0.353891, -0.132346, 0.778171, 0.368464, 0.285561, -0.305708, 0.368464, 0.285561, -0.190998, 0.369277, -0.313603, -0.190998, 0.369277, 0.284377)
+
+[node name="gun_clip" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 13
+script = ExtResource("1_w5yam")
+current_ammo = 10
+Pick_Up_Type = "Ammo"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("1_18rvb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_0b6fm")

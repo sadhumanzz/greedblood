@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc55733f512fq"]
+
+[ext_resource type="Script" path="res://target.gd" id="1_2o4f1"]
+[ext_resource type="PackedScene" uid="uid://blnbornrrl1af" path="res://target.glb" id="1_apd6f"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fg0r8"]
+points = PackedVector3Array(-0.400157, -0.1, -1, -1, -0.1, -0.400163, -0.400157, 0.0999978, -1, 0.399961, -0.1, -1, -1, 0.0999978, -0.400163, -1, -0.1, 0.399946, 0.399961, 0.0999978, -1, 1, -0.1, -0.400163, -1, 0.0999978, 0.399946, -0.400157, -0.1, 0.999979, 1, 0.0999978, -0.400163, 1, -0.1, 0.399946, -0.400157, 0.0999978, 0.999979, 0.399961, -0.1, 0.999979, 1, 0.0999978, 0.399946, 0.399961, 0.0999978, 0.999979)
+
+[node name="Target" type="StaticBody3D" groups=["Target"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_2o4f1")
+
+[node name="target" parent="." instance=ExtResource("1_apd6f")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_fg0r8")
+
+[editable path="target"]

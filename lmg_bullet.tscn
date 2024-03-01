@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5le8huy8s7fh"]
+
+[ext_resource type="Script" path="res://rocket.gd" id="1_3wyyc"]
+[ext_resource type="Texture2D" uid="uid://co7bx16rsi6ye" path="res://addons/kenney_particle_pack/rotated/trace_05_rotated.png" id="2_a4khf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vaosc"]
+height = 3.0
+
+[node name="LMG_Bullet" type="RigidBody3D"]
+top_level = true
+collision_layer = 4
+collision_mask = 5
+mass = 0.01
+continuous_cd = true
+max_contacts_reported = 10
+contact_monitor = true
+script = ExtResource("1_3wyyc")
+
+[node name="y" type="Sprite3D" parent="."]
+transform = Transform3D(-2.62268e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.62268e-08, 0, 0, 0.5)
+modulate = Color(0.909804, 0.670588, 0, 0.827451)
+texture = ExtResource("2_a4khf")
+
+[node name="x" type="Sprite3D" parent="y"]
+transform = Transform3D(0.6, -2.62268e-08, 1.14641e-15, 0, -2.62268e-08, -0.6, 2.62268e-08, 0.6, -2.62268e-08, 0, 0, 0)
+modulate = Color(0.909804, 0.670588, 0, 0.827451)
+texture = ExtResource("2_a4khf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, -2.62268e-08, 0.6, 0, -0.6, -2.62268e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vaosc")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

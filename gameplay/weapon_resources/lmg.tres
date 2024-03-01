@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=4 format=3 uid="uid://cnxr6rsykpl5t"]
+
+[ext_resource type="Script" path="res://gameplay/weapon_resources/Weapon_Resource.gd" id="1_5u3aj"]
+[ext_resource type="PackedScene" uid="uid://b5le8huy8s7fh" path="res://lmg_bullet.tscn" id="1_nokge"]
+[ext_resource type="PackedScene" uid="uid://dpwtnvk40qksh" path="res://spawnable weapons/lmg.tscn" id="2_np3yb"]
+
+[resource]
+script = ExtResource("1_5u3aj")
+Weapon_Name = "lmg"
+Activate_Anim = "lmg_Activate"
+Shoot_Anim = "lmg_Shoot"
+Reload_Anim = "lmg_Reload"
+Deactivate_Anim = "lmg_Deactivate"
+OOA_Anim = "lmg_OOA"
+Current_Ammo = 12
+Reserve_Ammo = 24
+Magazine = 12
+Max_Ammo = 48
+Auto_Fire = true
+Weapon_Range = 2000
+Damage = 1
+Type = 1
+Projectile_To_Load = ExtResource("1_nokge")
+Projectile_Velocity = 800
+Weapon_Drop = ExtResource("2_np3yb")
+Can_Be_Dropped = true

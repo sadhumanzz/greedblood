@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://6xxbx3xxgn13"]
+
+[ext_resource type="PackedScene" uid="uid://bktqfu6saqpxe" path="res://Blender Models/Zappotronic.gltf" id="1_i6w65"]
+
+[node name="Zappotronic" instance=ExtResource("1_i6w65")]

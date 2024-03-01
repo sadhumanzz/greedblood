@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cchmavdrqrti6"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_88laa"]
+
+[node name="Rect" type="Sprite2D"]
+texture = SubResource("PlaceholderTexture2D_88laa")

@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cm435yv56c736"]
+
+[ext_resource type="Texture2D" uid="uid://upr7d5kh2atc" path="res://BONETEXTURELOWRES.png" id="1_dp23g"]
+
+[resource]
+albedo_texture = ExtResource("1_dp23g")
+texture_filter = 0

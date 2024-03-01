@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://mt3nccqoy7ly"]
+
+[ext_resource type="PackedScene" uid="uid://wmxgc3tsw8q8" path="res://Blender Models/shotgun.glb" id="1_vfh1x"]
+
+[node name="shotgun" instance=ExtResource("1_vfh1x")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

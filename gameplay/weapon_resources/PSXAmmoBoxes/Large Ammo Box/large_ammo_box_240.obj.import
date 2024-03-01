@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cdatr5lx43yuk"
+path="res://.godot/imported/large_ammo_box_240.obj-aa46a14d91ea0273ab82eb142a88ff4e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/large_ammo_box_240.obj-aa46a14d91ea0273ab82eb142a88ff4e.mesh"]
+
+source_file="res://gameplay/weapon_resources/PSXAmmoBoxes/Large Ammo Box/large_ammo_box_240.obj"
+dest_files=["res://.godot/imported/large_ammo_box_240.obj-aa46a14d91ea0273ab82eb142a88ff4e.mesh", "res://.godot/imported/large_ammo_box_240.obj-aa46a14d91ea0273ab82eb142a88ff4e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

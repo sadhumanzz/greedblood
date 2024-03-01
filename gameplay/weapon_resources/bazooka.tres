@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=4 format=3 uid="uid://j1a5n6nttg8w"]
+
+[ext_resource type="PackedScene" uid="uid://ddf5k0ikyfoev" path="res://rocket.tscn" id="1_cnhdp"]
+[ext_resource type="Script" path="res://gameplay/weapon_resources/Weapon_Resource.gd" id="1_qpr4e"]
+[ext_resource type="PackedScene" uid="uid://b2qm4644btvxd" path="res://spawnable weapons/bazooka.tscn" id="2_lbwdu"]
+
+[resource]
+script = ExtResource("1_qpr4e")
+Weapon_Name = "bazooka"
+Activate_Anim = "bazooka_Activate"
+Shoot_Anim = "bazooka_Shoot"
+Reload_Anim = "bazooka_Reload"
+Deactivate_Anim = "bazooka_Deactivate"
+OOA_Anim = "bazooka_OOA"
+Current_Ammo = 3
+Reserve_Ammo = 6
+Magazine = 3
+Max_Ammo = 9
+Auto_Fire = false
+Weapon_Range = 2000
+Damage = 3
+Type = 2
+Projectile_To_Load = ExtResource("1_cnhdp")
+Projectile_Velocity = 100
+Weapon_Drop = ExtResource("2_lbwdu")
+Can_Be_Dropped = true

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=3 format=3 uid="uid://dyh7e5yhabw68"]
+
+[ext_resource type="PackedScene" uid="uid://bgugho736wcku" path="res://spawnable weapons/gun.tscn" id="1_58m4b"]
+[ext_resource type="Script" path="res://gameplay/weapon_resources/Weapon_Resource.gd" id="1_oydxw"]
+
+[resource]
+script = ExtResource("1_oydxw")
+Weapon_Name = "gun"
+Activate_Anim = "gun_Activate"
+Shoot_Anim = "gun_Shoot"
+Reload_Anim = "gun_Reload"
+Deactivate_Anim = "gun_Deactivate"
+OOA_Anim = "gun_OOA"
+Current_Ammo = 6
+Reserve_Ammo = 24
+Magazine = 6
+Max_Ammo = 36
+Auto_Fire = false
+Weapon_Range = 2000
+Damage = 2
+Type = 1
+Projectile_Velocity = 0
+Weapon_Drop = ExtResource("1_58m4b")
+Can_Be_Dropped = false

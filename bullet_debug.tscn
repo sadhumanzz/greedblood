@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cre5lbxgfrje1"]
+
+[ext_resource type="Texture2D" uid="uid://ck621r3ttttx5" path="res://addons/kenney_particle_pack/star_08.png" id="1_27q64"]
+[ext_resource type="Script" path="res://Bullet_Debug.gd" id="2_ossjs"]
+
+[node name="Bullet_Debug" type="Sprite3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+modulate = Color(1, 1, 0.811765, 0.572549)
+billboard = 2
+double_sided = false
+texture = ExtResource("1_27q64")
+script = ExtResource("2_ossjs")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

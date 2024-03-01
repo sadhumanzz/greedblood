@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1bv1tuj0aw0u"]
+
+[ext_resource type="PackedScene" uid="uid://ceu8oeolyn2bv" path="res://mauser.glb" id="1_bj1ff"]
+
+[node name="mauser" instance=ExtResource("1_bj1ff")]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(-0.07, 0, -1.05697e-08, 0, 0.07, 0, 1.05697e-08, 0, -0.07, 0, 0, 0)

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c7ifjvcx4awn8"
+path="res://.godot/imported/12g_red_240.obj-3a1a452ad9bf58a7c89c556a25fcc20b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/12g_red_240.obj-3a1a452ad9bf58a7c89c556a25fcc20b.mesh"]
+
+source_file="res://gameplay/weapon_resources/PSXAmmoBoxes/12g/12g_red_240.obj"
+dest_files=["res://.godot/imported/12g_red_240.obj-3a1a452ad9bf58a7c89c556a25fcc20b.mesh", "res://.godot/imported/12g_red_240.obj-3a1a452ad9bf58a7c89c556a25fcc20b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
